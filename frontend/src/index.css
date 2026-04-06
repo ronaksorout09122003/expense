@@ -1,0 +1,86 @@
+:root {
+  color-scheme: light;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --radius-sm: 16px;
+  --radius-md: 22px;
+  --radius-lg: 30px;
+  --surface-strong: rgba(255, 255, 255, 0.92);
+  --surface-soft: rgba(255, 255, 255, 0.8);
+  --surface-muted: rgba(244, 247, 252, 0.92);
+  --line-soft: rgba(148, 163, 184, 0.22);
+  --line-strong: rgba(96, 165, 250, 0.34);
+  --shadow-soft: 0 22px 48px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 18px 42px rgba(15, 23, 42, 0.08);
+  --shadow-focus: 0 0 0 4px rgba(37, 99, 235, 0.14);
+  font-family: 'Aptos', 'Segoe UI Variable Text', sans-serif;
+  color: #1f2937;
+  background:
+    radial-gradient(circle at top left, rgba(11, 99, 243, 0.18), transparent 30%),
+    radial-gradient(circle at top right, rgba(18, 161, 80, 0.1), transparent 25%),
+    radial-gradient(circle at bottom right, rgba(255, 176, 32, 0.1), transparent 26%),
+    linear-gradient(180deg, #f6f9fc 0%, #eef4fa 48%, #f7f8fb 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(11, 99, 243, 0.16), transparent 30%),
+    radial-gradient(circle at right, rgba(255, 176, 32, 0.1), transparent 26%),
+    linear-gradient(180deg, #f6f9fc 0%, #eef4fa 48%, #f7f8fb 100%);
+}
+
+body.mobile-nav-open {
+  overflow: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
