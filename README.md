@@ -47,7 +47,7 @@ Preview URL: `http://127.0.0.1:4173`
 
 ## PostgreSQL mode
 
-The backend runs on H2 by default for easy setup. By default the WAR stores the H2 files in `%USERPROFILE%\\expense-data` on Windows or `~/expense-data` on Linux/macOS, so it stays stable across restarts and across systems unless you override `EXPENSE_DATA_DIR`.
+The backend runs on H2 by default for easy setup. By default the app stores the H2 files in `%USERPROFILE%\\expense-data` on Windows or `~/expense-data` on Linux/macOS, so it stays stable across restarts and across systems unless you override `EXPENSE_DATA_DIR`.
 
 To use PostgreSQL from the same `application.properties`, activate the `postgres` profile and set the connection environment variables:
 
@@ -69,30 +69,41 @@ $env:EXPENSE_DATA_DIR='D:\expense-data'
 ## Build checks completed
 
 - `backend`: `.\mvnw.cmd test`
+- `backend` standalone package: `.\mvnw.cmd -DskipTests package`
+- `backend` with bundled frontend: `.\mvnw.cmd -DskipTests package -Pbundle-frontend`
 - `frontend`: `npm.cmd run lint`
 - `frontend`: `npm.cmd run build`
 
-## Build WAR for Apache Tomcat
+## Backend-only deploy build
 
 ```powershell
 cd backend
-.\mvnw.cmd clean package
+.\mvnw.cmd -DskipTests package
 ```
 
-WAR output: `backend\target\expense.war`
+JAR output: `backend\target\expense.jar`
 
-Tomcat deployment:
+Use this mode for Railway, Render, or any separate backend deployment where the frontend is hosted independently.
 
-1. Copy `backend\target\expense.war` into your Tomcat `webapps` folder.
-2. Start Tomcat.
-3. Open `http://localhost:8080/expense/`
+## Bundled frontend build
+
+```powershell
+cd backend
+.\mvnw.cmd -DskipTests package -Pbundle-frontend
+```
+
+This mode keeps the older combined packaging flow for environments where you want Spring Boot to serve the built frontend assets from the same artifact.
+
+## Run bundled artifact
+
+1. Build with `bundle-frontend` if you want the backend jar to serve the frontend too.
+2. Run `java -jar backend\target\expense.jar`
+3. Open `http://localhost:8080/`
 
 Notes:
 
-- The WAR already includes the built React frontend.
-- API calls automatically use the Tomcat app context path, so `/expense/` works without extra frontend changes.
-- If PostgreSQL variables are not provided, the same WAR starts with its own local H2 database automatically.
-- This app is built on Spring Boot 3 and should be deployed to a Jakarta-compatible Tomcat version such as Tomcat 10.1+.
+- The bundled build includes the built React frontend.
+- If PostgreSQL variables are not provided, the same jar starts with its own local H2 database automatically.
 
 ## API docs
 
